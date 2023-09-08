@@ -24,7 +24,7 @@ dp = Dispatcher(bot)
 async def send_document_to_user(message, person, tmp_course):
     try:
         wait_message = await message.reply(text="لطفا کمی صبر کنید", reply_markup=ReplyKeyboardRemove())
-        file_path = f"jozve/{valid_person[person]}/{tmp_course}.pdf"
+        file_path = f"jozve/{valid_person[person]}/{valid_course[tmp_course]}.pdf"
         with open(file_path, "rb") as file:
             await message.reply_document(document=file, caption=f"جزوه {tmp_course} توسط {person}", reply_markup=bye_me_coffee)
             await message.answer(text="شما میتوانید برای حمایت از کسی که جزوه را تهیه کرده است, قهوه بخرید D:", reply_markup=ReplyKeyboardRemove())
@@ -76,11 +76,11 @@ async def support_command(message: types.Message):
     await send_support_message(message)
 
 
-@dp.message_handler(lambda message: message.text in valid_course)
+@dp.message_handler(lambda message: message.text in valid_course.keys())
 async def course_handler(message: types.Message):
     global selection_course 
     global course_input
-    selection_course = message.text
+    selection_course = valid_course[message.text]
     course_input = True
     await message.answer(text="فرد مورد نظر خود را انتخاب کنید", reply_markup=person_keyboard)
 
