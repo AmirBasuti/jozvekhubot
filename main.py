@@ -17,7 +17,7 @@ load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
 
 # Initialize the bot and dispatcher
-bot = Bot()
+bot = Bot(TOKEN)
 dp = Dispatcher(bot)
 
 
@@ -80,7 +80,7 @@ async def support_command(message: types.Message):
 async def course_handler(message: types.Message):
     global selection_course 
     global course_input
-    selection_course = valid_course[message.text]
+    selection_course = message.text
     course_input = True
     await message.answer(text="فرد مورد نظر خود را انتخاب کنید", reply_markup=person_keyboard)
 
