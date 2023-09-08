@@ -6,6 +6,8 @@ This Telegram bot is a pamphlet uploader that you can use to receive your academ
 ```bash
 pip install -r requirements.txt
 ```
-2. ```
+
+2.
+```bash
 cp .env.example .env
 ```
